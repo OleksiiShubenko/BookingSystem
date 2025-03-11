@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: BookingSystem
+
+  datasource:
+#    url: jdbc:postgresql://localhost:5432/bookingDB # local run
+    url: jdbc:postgresql://postgres:5432/bookingDB # docker run
+    username: postgres
+    password: password
+    driver-class-name: org.postgresql.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.xml
+    enabled: true
+  jpa:
+#    hibernate:
+#      ddl-auto: create
+    cache:
+      user_second_level_cache: true
+    properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+    properties.hibernate.temp.use_jdbc_metadata_defaults: false
+    properties.hibernate.connection.CharSet: utf8
+    properties.hibernate.connection.characterEncoding: utf8
+    properties.hibernate.connection.useUnicode: true
+    properties.hibernate.connection.releaseMode: after_transaction
+    open-in-view: false
+
+# change localhost to [kafka and redis] if app runs in docker
+  kafka:
+#    bootstrap-servers: localhost:9092  # local run
+    bootstrap-servers: kafka:9092 # docker run
+    consumer:
+      group-id: my-group
+      auto-offset-reset: earliest
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+  data:
+    redis:
+      host: redis # docker run
+#      host: localhost # local run
+      port: 6379
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
