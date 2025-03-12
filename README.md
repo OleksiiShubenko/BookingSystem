@@ -4,14 +4,16 @@ Booking system which include postgres, kafka and redis.
 
 
 ### Prerequisites
-Application can be run using docker-compose or running BookingSystemApplication.java but firstly need to make minor changes in application.yml and docker compose files - need to uncomment 'local run lines' and comment 'docker run'
-Rebuild app:
-./gradlew clean build
 
-Commands to manage app:
-docker-compose up
-Stop application.
-docker-compose down
+Postgres, kafka and redis are run in docker. There are approaches to run application:
+1. Application can be run locally using IDEA configuration running main from BookingSystemApplication.java:
+* Run command: `docker compose -f docker-compose-local.yaml up` to up services;
+* Then run main method from BookingSystemApplication.java.
+
+2. Application can be run using docker compose:
+* Run command: `docker compose -f docker-compose.yaml up` to up all services including booking-system;
+
+Before running clean build directory and build command: `./gradlew clean build`
 
 Docker postgres volume also can be removed if any inconsistent data appears.  
 ## Commands
@@ -28,6 +30,7 @@ To create a new unit:
 POST http://localhost:8080/unit
 Body:
 {
+"username": "user1"
 "numRooms": 3,
 "type": "HOME",
 "floor": 3,

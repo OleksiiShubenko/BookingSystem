@@ -1,22 +1,6 @@
 version: '3.8'
 
 services:
-  booking-system:
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    container_name: booking-system
-    environment:
-      SPRING_PROFILES_ACTIVE: docker
-    ports:
-      - "8080:8080"
-    depends_on:
-      - postgres
-      - kafka
-      - redis
-    networks:
-      - local_network
-
   postgres:
     image: postgis/postgis:16-3.5-alpine
     container_name: postgres
@@ -50,7 +34,7 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092 # docker run
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092 # for local run
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     depends_on:
       - zookeeper
