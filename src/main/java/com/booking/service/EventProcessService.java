@@ -70,7 +70,6 @@ public class EventProcessService {
         unitAvailabilityCacheService.decreaseAvailableUnits();
     }
 
-
     private void setPaymentTimer(String transactionId) {
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
@@ -79,8 +78,8 @@ public class EventProcessService {
                 kafkaEventProducer.generateEvent(new EventDto(transactionId, EventType.BOOKING_CANCELLED));
             }
         };
-        // uncomment line with 1-minute timer to test is faster
         timer.schedule(task, 15 * 60 * 1000);
+        // uncomment line with 1-minute timer to test is faster
 //        timer.schedule(task, 1 * 60 * 1000);
         timerHolder.put(transactionId, timer);
     }

@@ -19,14 +19,17 @@ import java.util.List;
 public class UnitService {
 
     private final UnitRepository unitRepository;
+    private final UserService userService;
     private final BookingService bookingService;
     private final UnitAvailabilityCacheService unitAvailabilityCacheService;
 
     @Autowired
     public UnitService(UnitRepository unitRepository,
+                       UserService userService,
                        @Lazy UnitAvailabilityCacheService unitAvailabilityCacheService,
                        @Lazy BookingService bookingService) {
         this.unitRepository = unitRepository;
+        this.userService = userService;
         this.unitAvailabilityCacheService = unitAvailabilityCacheService;
         this.bookingService = bookingService;
     }
@@ -52,6 +55,7 @@ public class UnitService {
                 .floor(unitDto.floor())
                 .cost(unitDto.cost())
                 .description(unitDto.description())
+                .owner(userService.getUser(unitDto.username()))
                 .build();
 
         unitAvailabilityCacheService.increaseAvailableUnits();
@@ -90,6 +94,7 @@ public class UnitService {
         }
 
         return units.stream().map(it -> new UnitDto(
+                it.getOwner().getUsername(),
                 it.getNumRooms(),
                 it.getType(),
                 it.getFloor(),

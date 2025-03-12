@@ -29,7 +29,7 @@ class UnitControllerTest {
 
     @Test
     void createUnit_ShouldReturnCreatedUnit() {
-        UnitDto unitDto = new UnitDto(2, UnitType.APARTMENTS, 3, 1200.50, "Spacious unit");
+        UnitDto unitDto = new UnitDto("user1", 2, UnitType.APARTMENTS, 3, 1200.50, "Spacious unit");
         Unit expectedUnit = new Unit();
         when(unitService.createUnit(unitDto)).thenReturn(expectedUnit);
 
@@ -43,7 +43,7 @@ class UnitControllerTest {
     @Test
     void searchUnits_ShouldReturnListOfUnits() {
         UnitSearchParams params = new UnitSearchParams();
-        List<UnitDto> expectedUnits = List.of(new UnitDto(2, UnitType.HOME, 3, 1500.0, "Nice unit"));
+        List<UnitDto> expectedUnits = List.of(new UnitDto("user1", 2, UnitType.HOME, 3, 1500.0, "Nice unit"));
         when(unitService.getUnits(params, 0, 10)).thenReturn(expectedUnits);
 
         List<UnitDto> result = unitController.searchUnits(params, 0, 10);

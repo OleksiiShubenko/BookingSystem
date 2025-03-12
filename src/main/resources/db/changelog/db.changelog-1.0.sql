@@ -1,15 +1,17 @@
+CREATE TABLE users (
+    username VARCHAR(255) PRIMARY KEY,
+    password VARCHAR(255) NOT NULL
+);
+
 CREATE TABLE unit (
     id SERIAL PRIMARY KEY,
     num_rooms INT NOT NULL,
     type VARCHAR(255) NOT NULL,
     floor INT NOT NULL,
     cost DOUBLE PRECISION NOT NULL,
-    description TEXT
-);
-
-CREATE TABLE users (
-    username VARCHAR(255) PRIMARY KEY,
-    password VARCHAR(255) NOT NULL
+    owner_id VARCHAR(255) NOT NULL,
+    description TEXT,
+    CONSTRAINT fk_user FOREIGN KEY (owner_id) REFERENCES users(username)
 );
 
 CREATE TABLE booking (

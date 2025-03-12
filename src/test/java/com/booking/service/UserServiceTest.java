@@ -29,7 +29,7 @@ class UserServiceTest {
 
     private final String USERNAME = "testUser";
     private final UserDto validUserDto = new UserDto(USERNAME, "password123");
-    private final User existingUser = new User(USERNAME, "password123", List.of());
+    private final User existingUser = new User(USERNAME, "password123", List.of(), List.of());
 
     @Test
     void getUser_ShouldReturnUser_WhenUserExists() {

@@ -3,7 +3,7 @@ package com.booking.dataModel.dto;
 import com.booking.dataModel.UnitType;
 
 public record UnitDto(
-//        String username,
+        String username,
         int numRooms,
         UnitType type,
         int floor,

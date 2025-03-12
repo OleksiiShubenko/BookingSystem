@@ -38,6 +38,10 @@ public class Unit {
     @OneToMany(mappedBy = "unit", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Booking> bookings;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id", nullable = false)
+    private User owner;
+
     public double getIncreasedCost() {
         return cost + cost * 0.15;
     }

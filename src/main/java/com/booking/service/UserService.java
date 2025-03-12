@@ -18,6 +18,10 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    public Boolean isUserExist(String username){
+        return userRepository.existsById(username);
+    }
+
     /**
      * Returns user by username
      */

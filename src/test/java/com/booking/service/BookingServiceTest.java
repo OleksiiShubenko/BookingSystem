@@ -45,8 +45,8 @@ public class BookingServiceTest {
     @Test
     public void shouldBookUnit_Success() {
         BookingDto bookingDto = new BookingDto("user1", 1, Instant.now(), Instant.now().plusSeconds(3600));
-        Unit unit = new Unit(1, 2, UnitType.APARTMENTS, 1, 100.0, "Description", null);
-        User user = new User("user1", "password", null);
+        Unit unit = new Unit(1, 2, UnitType.APARTMENTS, 1, 100.0, "Description", null, null);
+        User user = new User("user1", "password", null, null);
         Payment payment = new Payment();
         payment.setTransactionId(UUID.randomUUID().toString());
         payment.setCost(unit.getIncreasedCost());

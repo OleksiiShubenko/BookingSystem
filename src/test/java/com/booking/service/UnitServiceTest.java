@@ -3,6 +3,7 @@ package com.booking.service;
 import com.booking.dataModel.Booking;
 import com.booking.dataModel.Unit;
 import com.booking.dataModel.UnitType;
+import com.booking.dataModel.User;
 import com.booking.dataModel.dto.UnitAvailabilityInfo;
 import com.booking.dataModel.dto.UnitDto;
 import com.booking.dataModel.dto.UnitSearchParams;
@@ -32,6 +33,8 @@ class UnitServiceTest {
     @Mock
     private UnitRepository unitRepositoryMock;
     @Mock
+    private UserService userService;
+    @Mock
     private BookingService bookingServiceMock;
 
     @Mock
@@ -40,8 +43,9 @@ class UnitServiceTest {
     @InjectMocks
     private UnitService unitService;
 
-    private final Unit unit = new Unit(1, 3, UnitType.APARTMENTS, 2, 1500.0, "Apartments", null);
-    private final UnitDto unitDto = new UnitDto(3, UnitType.APARTMENTS, 2, 1500.0, "Apartments");
+    private final User USER = User.builder().username("user1").password("pass1").build();
+    private final Unit unit = new Unit(1, 3, UnitType.APARTMENTS, 2, 1500.0, "Apartments", null, USER);
+    private final UnitDto unitDto = new UnitDto("user1", 3, UnitType.APARTMENTS, 2, 1500.0, "Apartments");
 
     @Test
     void getUnit_ShouldReturnUnit_WhenUnitExists() {
@@ -68,6 +72,7 @@ class UnitServiceTest {
     @Test
     void createUnit_ShouldReturnCreatedUnit_WhenUnitIsCreated() {
         when(unitRepositoryMock.save(any(Unit.class))).thenReturn(unit);
+        when(userService.getUser(unitDto.username())).thenReturn(USER);
 
         Unit result = unitService.createUnit(unitDto);
 
