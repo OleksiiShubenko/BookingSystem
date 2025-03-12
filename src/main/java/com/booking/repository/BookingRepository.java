@@ -39,7 +39,6 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
             "WHERE b.user.username = :username AND " +
             "b.unit.id = :unitId AND " +
             "b.fromTime = :fromTime AND " +
-            "b.toTime = :toTime AND " +
-            "b.status = :status")
-    Booking findByUserNameAndUnitIdAndFromTimeAndToTimeAndStatus(String username, Integer unitId, Instant fromTime, Instant toTime, BookingStatus status);
+            "b.toTime = :toTime")
+    Booking findByUserNameAndUnitIdAndFromTimeAndToTimeAndStatus(String username, Integer unitId, Instant fromTime, Instant toTime);
 }

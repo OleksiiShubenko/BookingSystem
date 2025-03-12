@@ -101,8 +101,7 @@ public class BookingService {
                 bookingDto.username(),
                 bookingDto.unitId(),
                 bookingDto.fromTime(),
-                bookingDto.toTime(),
-                BookingStatus.BOOKED
+                bookingDto.toTime()
         );
         if (currentBooking == null) {
             throw new EntityNotFoundException("Booking with username: " + bookingDto.username() +
@@ -118,7 +117,7 @@ public class BookingService {
 
             return bookingDetails(currentBooking, "Booking canceling in progress", "Payment cancelling in progress");
         } else {
-            return bookingDetails(currentBooking, "Booking could not be cancelled due to incorrect status", "Paymnet could not be cancelled due to incorrect status");
+            return bookingDetails(currentBooking, "Booking could not be cancelled due to incorrect status", "Payment could not be cancelled due to incorrect status");
         }
     }
 
