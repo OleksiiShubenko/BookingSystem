@@ -39,7 +39,7 @@ public class UnitController {
             }
     )
     @PostMapping
-    public Unit createUnit(@RequestBody UnitDto unitDto) {
+    public UnitDto createUnit(@RequestBody UnitDto unitDto) {
         return unitService.createUnit(unitDto);
     }
 

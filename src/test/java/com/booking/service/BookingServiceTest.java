@@ -102,7 +102,7 @@ public class BookingServiceTest {
                 .unit(Unit.builder().id(1).build())
                 .build();
         when(bookingRepository.findByUserNameAndUnitIdAndFromTimeAndToTimeAndStatus(
-                bookingDto.username(), bookingDto.unitId(), bookingDto.fromTime(), bookingDto.toTime(), BookingStatus.BOOKED
+                bookingDto.username(), bookingDto.unitId(), bookingDto.fromTime(), bookingDto.toTime()
         )).thenReturn(existingBooking);
 
         BookingDetails bookingDetails = bookingService.cancelBooking(bookingDto);
@@ -118,7 +118,7 @@ public class BookingServiceTest {
         BookingDto bookingDto = new BookingDto("user1", 1, Instant.now(), Instant.now().plusSeconds(3600));
 
         when(bookingRepository.findByUserNameAndUnitIdAndFromTimeAndToTimeAndStatus(
-                bookingDto.username(), bookingDto.unitId(), bookingDto.fromTime(), bookingDto.toTime(), BookingStatus.BOOKED
+                bookingDto.username(), bookingDto.unitId(), bookingDto.fromTime(), bookingDto.toTime()
         )).thenReturn(null);
 
         EntityNotFoundException exception = assertThrows(EntityNotFoundException.class, () -> bookingService.cancelBooking(bookingDto));

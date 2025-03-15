@@ -48,7 +48,7 @@ public class UnitService {
     /**
      * Create a new unit by provided parameters
      */
-    public Unit createUnit(UnitDto unitDto) {
+    public UnitDto createUnit(UnitDto unitDto) {
         var unit = Unit.builder()
                 .numRooms(unitDto.numRooms())
                 .type(unitDto.type())
@@ -59,7 +59,8 @@ public class UnitService {
                 .build();
 
         unitAvailabilityCacheService.increaseAvailableUnits();
-        return unitRepository.save(unit);
+        unitRepository.save(unit);
+        return mapDto(unit);
     }
 
     public long countAll() {
@@ -110,6 +111,17 @@ public class UnitService {
         return new UnitAvailabilityInfo(
                 unitAvailabilityCacheService.getAvailableUnits(),
                 "Units availability info"
+        );
+    }
+
+    private UnitDto mapDto(Unit unit){
+        return new UnitDto(
+                unit.getOwner().getUsername(),
+                unit.getNumRooms(),
+                unit.getType(),
+                unit.getFloor(),
+                unit.getCost(),
+                unit.getDescription()
         );
     }
 }

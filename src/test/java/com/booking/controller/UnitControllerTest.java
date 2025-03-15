@@ -31,9 +31,9 @@ class UnitControllerTest {
     void createUnit_ShouldReturnCreatedUnit() {
         UnitDto unitDto = new UnitDto("user1", 2, UnitType.APARTMENTS, 3, 1200.50, "Spacious unit");
         Unit expectedUnit = new Unit();
-        when(unitService.createUnit(unitDto)).thenReturn(expectedUnit);
+        when(unitService.createUnit(unitDto)).thenReturn(unitDto);
 
-        Unit actualUnit = unitController.createUnit(unitDto);
+        UnitDto actualUnit = unitController.createUnit(unitDto);
 
         assertNotNull(actualUnit);
         assertEquals(expectedUnit, actualUnit);

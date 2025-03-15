@@ -74,9 +74,9 @@ class UnitServiceTest {
         when(unitRepositoryMock.save(any(Unit.class))).thenReturn(unit);
         when(userService.getUser(unitDto.username())).thenReturn(USER);
 
-        Unit result = unitService.createUnit(unitDto);
+        UnitDto result = unitService.createUnit(unitDto);
 
-        assertEquals(unit, result);
+        assertEquals(unitDto, result);
 
         verify(unitRepositoryMock, times(1)).save(any(Unit.class));
         verify(unitAvailabilityCacheService, times(1)).increaseAvailableUnits();
