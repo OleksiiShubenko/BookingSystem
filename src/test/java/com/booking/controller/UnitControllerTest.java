@@ -36,7 +36,7 @@ class UnitControllerTest {
         UnitDto actualUnit = unitController.createUnit(unitDto);
 
         assertNotNull(actualUnit);
-        assertEquals(expectedUnit, actualUnit);
+        assertEquals(unitDto, actualUnit);
         verify(unitService, times(1)).createUnit(unitDto);
     }
 
